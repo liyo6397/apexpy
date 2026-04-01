@@ -85,7 +85,6 @@ class Apex(object):
 
         self.RE = 6371.009  # Mean Earth radius in km
         self.set_refh(refh)  # Reference height in km
-
         if date is None:
             self.year = helpers.toYearFraction(dt.datetime.now(
                 tz=dt.timezone.utc))

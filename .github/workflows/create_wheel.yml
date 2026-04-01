@@ -30,7 +30,7 @@ jobs:
           CIBW_SKIP: "*-musllinux*"
           CIBW_BUILD: "cp313-*"
           CIBW_TEST_REQUIRES: "numpy"
-          CIBW_TEST_COMMAND: "python -c \"import apexpy; print(apexpy.__version__)\" && python {project}/example.py"
+          CIBW_TEST_COMMAND: "python -c \"import apexpy; print(apexpy.__version__)\" && python {project}/tests/example.py"
 
       - name: Upload wheels
         uses: actions/upload-artifact@v4
