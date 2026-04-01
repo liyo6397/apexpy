@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
           architecture: "x64"
 
       - name: Install MSYS2 + gfortran
@@ -42,7 +42,7 @@ jobs:
           FC: gfortran
           CC: gcc
           CXX: g++
-          CIBW_BUILD: "cp313-*"
+          CIBW_BUILD: "cp314-*"
           CIBW_TEST_REQUIRES: "numpy"
           CIBW_TEST_COMMAND: "python -c \"import apexpy; print(apexpy.__version__)\" && python {project}/tests/example.py"
 

@@ -2,7 +2,7 @@ name: Test for creating the linux wheel based on python version >=3.13
 
 on:
   push:
-    branches: ["py313wheel"] # Assign the branch that triggers this workflow
+    branches: ["-py313wheel"] # Assign the branch that triggers this workflow
 
 jobs:
   build-wheel:
