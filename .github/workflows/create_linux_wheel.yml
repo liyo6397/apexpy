@@ -1,0 +1,39 @@
+name: Test for creating the linux wheel based on python version >=3.13
+
+on:
+  push:
+    branches: ["py313wheel"] # Assign the branch that triggers this workflow
+
+jobs:
+  build-wheel:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+
+      - name: Install dependencies and cibuildwheel
+        run: |
+          python -m pip install cibuildwheel
+
+      - name: Build wheels with cibuildwheel # Upgrade to >=3.1.0 after Python3.14 final release
+        uses: pypa/cibuildwheel@v3.1.0
+        env:
+          CIBW_ARCHS: "x86_64"
+          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+          CIBW_SKIP: "*-musllinux*"
+          CIBW_BUILD: "cp314-*"
+          CIBW_TEST_REQUIRES: "numpy"
+          CIBW_TEST_COMMAND: "python -c \"import apexpy; print(apexpy.__version__)\" && python {project}/tests/example.py"
+
+      - name: Upload wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-wheels
+          path: wheelhouse/*.whl
